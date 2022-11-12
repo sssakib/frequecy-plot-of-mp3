@@ -1,0 +1,41 @@
+%% shakhawat 
+clc
+clear all
+close all
+
+[y,Fs]=audioread('voice.mp3.mp3');
+t=0: 1/Fs :1000/Fs;
+m=y(9355:10355);
+
+fc=100000;
+c_signal=sin(2*pi*fc*t);
+mod_signal=m.*c_signal;
+
+figure(1)
+subplot(311)
+plot(t,m,'b','linewidth',1)
+title('Message signal')
+grid on
+
+figure(1)
+subplot(312)
+plot(t,c_signal,'b','linewidth',1)
+title('Carrier signal')
+grid on
+
+subplot(313)
+plot(t,mod_signal)
+title('Modulated signal')
+grid on
+
+figure(2)
+plot(t,m,'r','linewidth',5)
+hold on
+plot(t,c_signal,'g')
+hold on
+plot(t,mod_signal,'--b')
+xlabel('Time')
+ylabel('Amplitude')
+hold on 
+grid on
+legend ('m_signal','c_signal','mod_signal')
